@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<h1>LISTA DE GATOS</h1>
+<ion-list>
+  <ion-item *ngFor="let documentGato of arrayColeccionGatos" (click)="selecGato(documentGato)">
+    <ion-grid>
+      <ion-row>
+          <h2>{{documentGato.data.nombre}}</h2>
+      </ion-row>
+      <ion-row>
+        <p>{{documentGato.data.color}}</p>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-list>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label>Nombre:</ion-label>
+    <ion-input [(ngModel)]="gatoEditando.nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Color:</ion-label>
+    <ion-input [(ngModel)]="gatoEditando.color"></ion-input>
+  </ion-item>
+  <ion-button (click)="clicBotonInsertar()">Añadir Gato</ion-button>
+  <ion-button (click)="clicBotonBorrar()">Borrar Gato</ion-button>
+  <ion-button (click)="clicBotonModificar()">Modificar Gato</ion-button>
+</ion-content>
+
