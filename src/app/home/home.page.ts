@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FirestoreService } from '../firestore.service';
 import { Gato } from '../gato';
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -21,7 +23,7 @@ document: any = {
   data: {} as Gato
 };
 
-constructor(private firestoreService: FirestoreService) {
+constructor(private firestoreService: FirestoreService, private router: Router ) {
   /*ojito*/this.gatoEditando = {} as Gato;
   this.obtenerListaGatos();
 
@@ -50,10 +52,11 @@ constructor(private firestoreService: FirestoreService) {
 
   selecGato(gatoSelec) {
     console.log("Gato seleccionado: ");
-    console.log(gatoSelec);
     this.idGatoSelec = gatoSelec.id;
     this.gatoEditando.nombre = gatoSelec.data.nombre;
     this.gatoEditando.color = gatoSelec.data.color;
+    this.router.navigate(['/gato-detalle/'+this.idGatoSelec]);
+    console.log(gatoSelec.id);
   }
 
   clicBotonBorrar() {

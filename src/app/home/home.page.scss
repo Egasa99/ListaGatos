@@ -26,10 +26,18 @@
   text-decoration: none;
 }
 
-ion-content{
+/*ion-content{
   --ion-background-color:#ffd17c;
 }
 
-ion-list{
-  --ion-background-color:#ffd17cbe;
+.item .item-content {
+  background-color: transparent !important;
+}
+ion-list,ion-grid,ion-button,ion-toolbar{
+  --background:#ac8c50;
+  background-color:#ac8c50;
+}*/
+
+.ion-col{
+  --ion-grid-column-padding:left;
 }

@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'gato-detalle/:id',
+    loadChildren: () => import('./gato-detalle/gato-detalle.module').then( m => m.GatoDetallePageModule)
+  },
 ];
 
 @NgModule({
