@@ -10,11 +10,15 @@
 
 <ion-grid>
   <ion-row>
-      <ion-col *ngFor="let documentGato of arrayColeccionGatos " (click)="selecGato(documentGato)" size-xl="6" size-lg="auto" size-md="auto" size-sm="auto" size-xs="6">
+      <ion-col *ngFor="let documentGato of arrayColeccionGatos; let i = index" [attr.data-index]="i" (click)="selecGato(documentGato)" size-xl="2" size-lg="4" size-md="6" size-sm="6" size-xs="12">
         <ion-card style="background-color: white;">
           <ion-card-content>
-            <h1>{{documentGato.data.nombre}}</h1>
+            <h1 style="display:inline-block;">{{documentGato.data.nombre}}</h1>
             <h2>{{documentGato.data.color}}</h2>
+            <div style="display: flex; align-items: center;justify-content: center;">
+              <img src="https://thiscatdoesnotexist.com/" alt="">
+          </div>
+            
         </ion-card-content>
       </ion-card>
     </ion-col>
