@@ -25,9 +25,14 @@ document: any = {
 
 constructor(private firestoreService: FirestoreService, private router: Router ) {
   /*ojito*/this.gatoEditando = {} as Gato;
-  this.obtenerListaGatos();
+  //this.obtenerListaGatos();
 
 }
+
+ionViewDidEnter(){
+  this.obtenerListaGatos();
+}
+
 
   clicBotonInsertar() {
     this.firestoreService.insertar("gatos", this.gatoEditando).then(() => {
@@ -59,7 +64,7 @@ constructor(private firestoreService: FirestoreService, private router: Router )
     console.log(gatoSelec.id);
   }
 
-  clicBotonBorrar() {
+/*  clicBotonBorrar() {
     this.firestoreService.borrar("gatos", this.idGatoSelec).then(() => {
       // Actualizar la lista completa
       this.obtenerListaGatos();
@@ -75,6 +80,6 @@ constructor(private firestoreService: FirestoreService, private router: Router )
       // Limpiar datos de pantalla
       this.gatoEditando = {} as Gato;
     })
-  }
+  }*/
 
 }

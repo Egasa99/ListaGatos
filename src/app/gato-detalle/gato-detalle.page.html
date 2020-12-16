@@ -14,10 +14,12 @@
   </ion-item>
   <ion-item>
     <ion-label>Nombre:</ion-label>
-    <ion-input></ion-input>
+    <ion-input value="{{document.data.nombre}}" [(ngModel)]="gatoEditando.nombre"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Color:</ion-label>
-    <ion-input></ion-input>
+    <ion-input value="{{document.data.color}}" [(ngModel)]="gatoEditando.color"></ion-input>
   </ion-item>
+  <ion-button (click)="clicBotonBorrar()">Borrar Gato</ion-button>
+  <ion-button (click)="clicBotonModificar()">Modificar Gato</ion-button>
 </ion-content>
