@@ -32,6 +32,7 @@ constructor(private firestoreService: FirestoreService, private router: Router )
 ionViewDidEnter(){
   this.obtenerListaGatos();
 }
+
   
   obtenerListaGatos(){
     this.firestoreService.consultar("gatos").subscribe((resultadoConsultaGatos) => {
