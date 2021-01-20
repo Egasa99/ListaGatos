@@ -20,6 +20,12 @@
     <ion-label>Color:</ion-label>
     <ion-input value="{{document.data.color}}" [(ngModel)]="gatoEditando.color"></ion-input>
   </ion-item>
-  <ion-button (click)="clicBotonBorrar()">Borrar Gato</ion-button>
-  <ion-button (click)="clicBotonModificar()">Modificar Gato</ion-button>
+
+  <ion-item *ngIf="id!='nuevo'">
+    <ion-button (click)="clicBotonBorrar()">Borrar Gato</ion-button>
+    <ion-button (click)="clicBotonModificar()">Modificar Gato</ion-button>
+  </ion-item>
+  <ion-item *ngIf="id=='nuevo'">
+    <ion-button (click)="clicBotonInsertar()">Añadir Gato</ion-button>
+  </ion-item>
 </ion-content>

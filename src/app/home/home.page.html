@@ -22,18 +22,15 @@
         </ion-card-content>
       </ion-card>
     </ion-col>
+      <ion-fab vertical="bottom" horizontal="end">
+        <ion-fab-button>
+          <ion-icon name="add" (click)="segundaPagina()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
   </ion-row>
 </ion-grid>
 
 <ion-content padding>
-  <ion-item>
-    <ion-label>Nombre:</ion-label>
-    <ion-input [(ngModel)]="gatoEditando.nombre"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Color:</ion-label>
-    <ion-input [(ngModel)]="gatoEditando.color"></ion-input>
-  </ion-item>
-  <ion-button (click)="clicBotonInsertar()">Añadir Gato</ion-button>
+  
 </ion-content>
 

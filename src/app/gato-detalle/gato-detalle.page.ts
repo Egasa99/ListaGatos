@@ -52,5 +52,13 @@ export class GatoDetallePage implements OnInit {
       this.router.navigate(['/home/']);
     })
   }
-
+  clicBotonInsertar() {
+    this.firestoreService.insertar("gatos", this.gatoEditando).then(() => {
+      console.log('Gato creada correctamente!');
+      this.gatoEditando= {} as Gato;
+      this.router.navigate(['/home/']);
+    }, (error) => {
+      console.error(error);
+    });
+  }
 }

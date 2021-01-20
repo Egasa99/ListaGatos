@@ -32,16 +32,6 @@ constructor(private firestoreService: FirestoreService, private router: Router )
 ionViewDidEnter(){
   this.obtenerListaGatos();
 }
-
-
-  clicBotonInsertar() {
-    this.firestoreService.insertar("gatos", this.gatoEditando).then(() => {
-      console.log('Gato creada correctamente!');
-      this.gatoEditando= {} as Gato;
-    }, (error) => {
-      console.error(error);
-    });
-  }
   
   obtenerListaGatos(){
     this.firestoreService.consultar("gatos").subscribe((resultadoConsultaGatos) => {
@@ -64,6 +54,9 @@ ionViewDidEnter(){
     console.log(gatoSelec.id);
   }
 
+  segundaPagina(){
+    this.router.navigate(['/gato-detalle/'+"nuevo"]);
+  }
 /*  clicBotonBorrar() {
     this.firestoreService.borrar("gatos", this.idGatoSelec).then(() => {
       // Actualizar la lista completa
