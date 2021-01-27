@@ -29,7 +29,7 @@ constructor(private firestoreService: FirestoreService, private router: Router )
 
 }
 
-ionViewDidEnter(){
+ionViewWillEnter(){
   this.obtenerListaGatos();
 }
 
@@ -56,6 +56,7 @@ ionViewDidEnter(){
   }
 
   segundaPagina(){
+    console.log("Segunda pantalla");
     this.router.navigate(['/gato-detalle/'+"nuevo"]);
   }
 /*  clicBotonBorrar() {

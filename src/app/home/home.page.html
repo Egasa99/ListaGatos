@@ -7,7 +7,7 @@
 </ion-header>
 
 <h1>LISTA DE GATOS</h1>
-
+<ion-content>
 <ion-grid>
   <ion-row>
       <ion-col *ngFor="let documentGato of arrayColeccionGatos; let i = index" [attr.data-index]="i" (click)="selecGato(documentGato)" size-xl="2" size-lg="4" size-md="6" size-sm="6" size-xs="12">
@@ -18,16 +18,16 @@
             <div style="display: flex; align-items: center;justify-content: center;">
               <img src="https://thiscatdoesnotexist.com/" alt="">
           </div>
-            
         </ion-card-content>
       </ion-card>
     </ion-col>
-      <ion-fab vertical="bottom" horizontal="end">
-        <ion-fab-button>
-          <ion-icon name="add" (click)="segundaPagina()"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
   </ion-row>
 </ion-grid>
 
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add" (click)="segundaPagina()"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>
 
