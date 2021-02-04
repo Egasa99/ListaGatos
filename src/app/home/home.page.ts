@@ -3,6 +3,7 @@ import { FirestoreService } from '../firestore.service';
 import { Gato } from '../gato';
 import { Router } from "@angular/router";
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -23,16 +24,18 @@ document: any = {
   data: {} as Gato
 };
 
-constructor(private firestoreService: FirestoreService, private router: Router ) {
+constructor(private firestoreService: FirestoreService, private router: Router) {
   /*ojito*/this.gatoEditando = {} as Gato;
-  //this.obtenerListaGatos();
+  this.obtenerListaGatos();
 
 }
 
 ionViewWillEnter(){
   this.obtenerListaGatos();
 }
-
+ionViewDidEnter(){
+  this.obtenerListaGatos();
+}
   
   obtenerListaGatos(){
     this.firestoreService.consultar("gatos").subscribe((resultadoConsultaGatos) => {

@@ -6,11 +6,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./tab-bar/tab-bar.module').then(m => m.TabBarPageModule)
   },
-  {
+  /*{
     path: '',
-    redirectTo: 'home',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
-  },
+  },*/
   {
     path: 'gato-detalle/:id',
     loadChildren: () => import('./gato-detalle/gato-detalle.module').then( m => m.GatoDetallePageModule)
