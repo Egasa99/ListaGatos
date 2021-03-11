@@ -51,9 +51,12 @@ ionViewDidEnter(){
 
   selecGato(gatoSelec) {
     console.log("Gato seleccionado: ");
+    //console.log(this.gatoEditando.foto);
     this.idGatoSelec = gatoSelec.id;
     this.gatoEditando.nombre = gatoSelec.data.nombre;
     this.gatoEditando.color = gatoSelec.data.color;
+    this.gatoEditando.raza = gatoSelec.data.raza;
+    this.gatoEditando.foto = gatoSelec.data.foto;
     this.router.navigate(['/gato-detalle/'+this.idGatoSelec]);
     console.log(gatoSelec.id);
   }

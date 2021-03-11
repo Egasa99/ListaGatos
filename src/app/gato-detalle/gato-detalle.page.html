@@ -21,11 +21,38 @@
     <ion-input value="{{document.data.color}}" [(ngModel)]="gatoEditando.color"></ion-input>
   </ion-item>
 
+  <ion-item>
+    <ion-label>Raza:</ion-label>
+    <ion-input value="{{document.data.raza}}" [(ngModel)]="gatoEditando.raza"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="document.data.foto!=undefined">
+    <ion-item>
+      <ion-label>Imagen:</ion-label>
+      <img src="{{document.data.foto}}" alt="">
+    </ion-item>
+
+  </ion-item>
   <ion-item *ngIf="id!='nuevo'">
+    <!--<ion-button (click)="deleteFile()">Borrar Imagen</ion-button> -->
     <ion-button (click)="aviso()">Borrar Gato</ion-button>
     <ion-button (click)="clicBotonModificar()">Modificar Gato</ion-button>
+
+    <ion-item *ngIf="document.data.foto!=null">
+      <ion-button (click)="deleteFile(document.data.foto)">Borrar Imagen</ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="document.data.foto==null">
+      <ion-button (click)="uploadImagePicker()">Subir Imagen</ion-button>
+    </ion-item>
   </ion-item>
+
   <ion-item *ngIf="id=='nuevo'">
     <ion-button (click)="clicBotonInsertar()">Añadir Gato</ion-button>
+
+    <ion-item *ngIf="document.data.foto==undefined">
+      <ion-button (click)="uploadImagePicker()">Subir Imagen</ion-button>
+    </ion-item>
+
   </ion-item>
 </ion-content>

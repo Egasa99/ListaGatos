@@ -3,7 +3,8 @@ import { ActivatedRoute } from "@angular/router";
 import { FirestoreService } from '../firestore.service';
 import { Gato } from '../gato';
 import { Router } from "@angular/router";
-import { AlertController } from '@ionic/angular';
+import { LoadingController,ToastController,AlertController } from '@ionic/angular';
+import {ImagePicker} from '@ionic-native/image-picker/ngx';
 @Component({
   selector: 'app-gato-detalle',
   templateUrl: './gato-detalle.page.html',
@@ -19,8 +20,11 @@ export class GatoDetallePage implements OnInit {
   constructor(
     private firestoreService: FirestoreService,
     private activatedRoute: ActivatedRoute,
-     private router: Router,
-     public alertController: AlertController) {
+    public alertController: AlertController,
+    private router: Router,
+    private loadingController:LoadingController,
+    private toastController:ToastController,
+    private ImagePicker:ImagePicker) {
     this.gatoEditando = {} as Gato;
    }
 
@@ -28,6 +32,10 @@ export class GatoDetallePage implements OnInit {
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
     this.obtenerId();
+    
+
+
+    
   }
   obtenerId(){
     this.firestoreService.consultarPorId("gatos", this.id).subscribe((resultado) => {
@@ -35,6 +43,7 @@ export class GatoDetallePage implements OnInit {
       if(resultado.payload.data() != null) {
         this.document.id = resultado.payload.id
         this.document.data = resultado.payload.data();
+        this.gatoEditando=this.document.data;
       } else {
         // No se ha encontrado un document con ese ID. Vaciar los datos que hubiera
         this.document.data = {} as Gato;
@@ -96,4 +105,71 @@ export class GatoDetallePage implements OnInit {
 
     await alert.present();
   }
+
+  async uploadImagePicker(){
+    const loading=await this.loadingController.create({
+      message:'Please wait...'});
+
+    const toast=await this.toastController.create({
+      message:'Image was updated successfully',
+      duration:3000
+    });
+
+    this.ImagePicker.hasReadPermission().then(
+      (result)=>{
+        if(result==false){
+          this.ImagePicker.requestReadPermission();
+        }
+        else{
+          this.ImagePicker.getPictures({
+            maximumImagesCount:1,
+            outputType:1
+          }).then(
+            (results)=>{
+              let nombreCarpeta="imagenes";
+
+              for(var i=0;i<results.length;i++){
+                loading.present();
+                let nombreImagen= `${new Date().getTime()}`;
+                this.firestoreService.uploadImage(nombreCarpeta,nombreImagen,results[i])
+                .then(snapshot =>{
+                  snapshot.ref.getDownloadURL()
+                  .then(downloadURL=>{
+                    console.log("downloadURL:"+downloadURL);
+                    this.gatoEditando.foto=downloadURL;
+                    toast.present();
+                    loading.dismiss();
+                  })
+                })
+              }
+            },
+            (err)=>{
+              console.log(err)
+            }
+          );
+        }
+      },(err)=>{
+        console.log(err);
+    });
+}
+ async deleteFile(fileURL){
+   const toast=await this.toastController.create({
+     message:'La imagen fue borrada satisfactoriamente',
+     duration:3000
+   });
+   this.firestoreService.deleteFileFromURL(fileURL)
+   .then(()=>{
+      toast.present();
+     this.gatoEditando.foto=null;
+     this.document.data.foto=null;
+     console.log(this.document.data.foto);
+     console.log(this.gatoEditando.foto);
+     
+   }
+   ,
+   (err)=>{
+     console.log(err);
+   })
+ }
+
 }
